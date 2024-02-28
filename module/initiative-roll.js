@@ -46,6 +46,7 @@ export class InitiativeRoll {
 	static async rollInitiative(ids) {
 		// Structure input data
 		ids = typeof ids === 'string' ? [ids] : ids;
+		if (ids.length === 0) return this;
 
 		// Iterate over Combatants, performing an initiative roll for each
 		const actors = [];
