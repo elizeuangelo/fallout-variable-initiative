@@ -1,0 +1,32 @@
+{
+	"id": "fallout-variable-initiative",
+	"title": "Variable Initiative (Fallout)",
+	"description": "Automatically force snap small and medium-sized tokens in the same square, for better token management in the grid.",
+	"version": "1.0.0",
+	"authors": [
+		{
+			"name": "Mad Wizard",
+			"discord": "mad.wizard"
+		}
+	],
+	"esmodules": ["./main.js"],
+	"compatibility": {
+		"minimum": 11,
+		"verified": 11
+	},
+	"relationships": {
+		"systems": [
+			{
+				"id": "fallout",
+				"type": "system",
+				"compatibility": {
+					"minimum": "11.3.6",
+					"verified": "11.3.6"
+				}
+			}
+		]
+	},
+	"url": "this is auto replaced",
+	"manifest": "this is auto replaced",
+	"download": "this is auto replaced"
+}
