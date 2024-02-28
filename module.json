@@ -1,7 +1,7 @@
 {
 	"id": "fallout-variable-initiative",
 	"title": "Variable Initiative (Fallout)",
-	"description": "Automatically force snap small and medium-sized tokens in the same square, for better token management in the grid.",
+	"description": "This module allows you to use a variable initiative system in the Fallout system for Foundry VTT.",
 	"version": "1.0.0",
 	"authors": [
 		{
@@ -28,5 +28,6 @@
 	},
 	"url": "this is auto replaced",
 	"manifest": "this is auto replaced",
-	"download": "this is auto replaced"
+	"download": "this is auto replaced",
+	"license": "this is auto replaced"
 }
