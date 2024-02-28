@@ -1,10 +1,10 @@
 import { getSetting } from './settings.js';
 
 export class InitiativeRoll {
-	static async create(actors) {
+	static async create(actors, clue) {
 		const advantage = await Dialog.wait(
 			{
-				title: `Initiative DC Roll`,
+				title: `Initiative DC Roll: ${clue}`,
 				content: '<p style="text-align: center">Roll in an advantaged position? (+1 to Effects)<p>',
 				default: 'no',
 				close: () => null,
@@ -47,6 +47,14 @@ export class InitiativeRoll {
 		// Structure input data
 		ids = typeof ids === 'string' ? [ids] : ids;
 		if (ids.length === 0) return this;
+		const types = new Set(
+			ids.map((id) => {
+				const type = this.combatants.get(id)?.actor.type;
+				return type ? game.i18n.localize(`TYPES.Actor.${type}`) : 'Unknown';
+			})
+		);
+		let clue = [...types].join(' / ');
+		if (clue.length > 33) clue = `${clue.slice(0, 30)}...`;
 
 		// Iterate over Combatants, performing an initiative roll for each
 		const actors = [];
@@ -56,7 +64,7 @@ export class InitiativeRoll {
 			if (!combatant?.isOwner) continue;
 			actors.push(combatant.actor);
 		}
-		InitiativeRoll.create(actors);
+		InitiativeRoll.create(actors, clue);
 		return this;
 	}
 
