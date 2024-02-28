@@ -28,7 +28,7 @@ export class InitiativeRoll {
 		const rolls = actors.map((actor) => new this(actor, advantage));
 		return rolls;
 	}
-	static async setInitiativeRolls(chatMessage, options, userId) {
+	static async setInitiativeRolls(chatMessage, _options, userId) {
 		if (game.user.id !== userId) return;
 		const falloutRoll = chatMessage.flags.falloutroll;
 		if (!falloutRoll) return;
@@ -39,7 +39,6 @@ export class InitiativeRoll {
 		if (!actor) return;
 		const combatant = game.combat.combatants.find((c) => c.actor.uuid === chatMessage.flags.actor);
 		if (!combatant) return;
-		debugger;
 		const isPlayer = actor.type === 'character';
 		const total = damage + (isPlayer ? 0.1 : 0);
 		combatant.update({ initiative: total });
@@ -50,7 +49,7 @@ export class InitiativeRoll {
 
 		// Iterate over Combatants, performing an initiative roll for each
 		const actors = [];
-		for (let [i, id] of ids.entries()) {
+		for (let [, id] of ids.entries()) {
 			// Get Combatant data (non-strictly)
 			const combatant = this.combatants.get(id);
 			if (!combatant?.isOwner) continue;
@@ -98,5 +97,7 @@ export class InitiativeRoll {
 Hooks.on('init', () => {
 	if (!getSetting('variableInitiative')) return;
 	Hooks.on('createChatMessage', InitiativeRoll.setInitiativeRolls);
-	Hooks.on('setup', () => (Combat.prototype.rollInitiative = InitiativeRoll.rollInitiative));
+	Hooks.on('setup', () => {
+		Combat.prototype.rollInitiative = InitiativeRoll.rollInitiative;
+	});
 });
